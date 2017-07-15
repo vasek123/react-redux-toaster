@@ -7,7 +7,7 @@
     "test": "jest",
     "test:watch": "npm test -- --watch"
   },
-  "author": "Václav Hlaváč",
+  "author": "Václav Hlaváč <hlavac.vaclav@gmail.com>",
   "license": "ISC",
   "dependencies": {
     "react": "^15.6.1",
