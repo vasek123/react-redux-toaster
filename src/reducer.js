@@ -17,7 +17,14 @@ export default (state = INITIAL_STATE, action) => {
     case actionTypes.REMOVE_TOAST: {
       return {
         ...state,
-        toasts: [...state.toasts].filter(toast => toast.id !== payload),
+        toasts: state.toasts.filter(toast => toast.id !== payload),
+      }
+    }
+
+    case actionTypes.REMOVE_LAST_TOAST: {
+      return {
+        ...state,
+        toasts: state.toasts.slice(0, state.toasts.length - 1),
       }
     }
 

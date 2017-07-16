@@ -1,14 +1,21 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import Toast from './Toast';
+import './Toaster.style.css';
+
+import Tray from './Tray';
 
 const Toaster = ({ toasts, children }) => {
   return (
-    <div className="__toaster__">
-      <ul className="__toasts__">
-        {toasts.map(toast => <Toast key={toast.id} {...toast} />)}
-      </ul>
+    <div>
+      <div className="__toaster__">
+        <Tray top left toasts={toasts} />
+        <Tray top center toasts={toasts} />
+        <Tray top right toasts={toasts} />
+        <Tray bottom left toasts={toasts} />
+        <Tray bottom center toasts={toasts} />
+        <Tray bottom right toasts={toasts} />
+      </div>
       {children}
     </div>
   )

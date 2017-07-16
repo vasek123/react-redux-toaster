@@ -1,0 +1,30 @@
+ul.__tray__ {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  list-style: none;
+}
+
+ul.__tray__top__ {
+  top: 10px;
+}
+
+ul.__tray__bottom__ {
+  bottom: 10px;
+}
+
+ul.__tray__left__ {
+  left: 10px;
+  align-items: flex-start;
+}
+
+ul.__tray__center__ {
+
+}
+
+ul.__tray__right__ {
+  right: 10px;
+  align-items: flex-end;
+}
