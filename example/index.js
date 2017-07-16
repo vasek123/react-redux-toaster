@@ -7,10 +7,10 @@ import App from './App';
 
 import store from './store';
 
-store.dispatch(addToast({ text: 'right bottom', right: true, bottom: true}));
-store.dispatch(addToast({ text: 'left bottom', left: true, bottom: true }));
-store.dispatch(addToast({ text: 'right top', right: true, top: true }));
-store.dispatch(addToast({ text: 'right bottom #2' }));
+store.dispatch(addToast({ text: '#1 – right bottom' }));
+store.dispatch(addToast({ text: '#2 – left bottom', position: 'left bottom' }));
+store.dispatch(addToast({ text: '#3 – right top', position: 'right top' }));
+store.dispatch(addToast({ text: '#4 – right bottom' }));
 
 ReactDOM.render(
   <Provider store={store}>

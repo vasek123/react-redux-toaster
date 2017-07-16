@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 import './Tray.style.css';
 
@@ -7,28 +8,27 @@ import Toast from './Toast';
 const getClassName = props => {
   let className = '__tray__';
 
-  if (props.top) className += ' __tray__top__';
-  if (props.bottom) className += ' __tray__bottom__';
-  if (props.left) className += ' __tray__left__';
-  if (props.right) className += ' __tray__right__';
-  if (props.center) className += ' __tray__center__';
+  if (props.position.split(' ').length > 2) {
+    console.error('Toaster: Received invalid position property!');
+  }
+
+  if (props.position.includes('top')) className += ' __tray__top__';
+  if (props.position.includes('bottom')) className += ' __tray__bottom__';
+  if (props.position.includes('left')) className += ' __tray__left__';
+  if (props.position.includes('right')) className += ' __tray__right__';
+  if (props.position.includes('center')) className += ' __tray__center__';
 
   return className;
 };
 
 const filterToasts = (toasts, position) => {
-  return toasts.filter(toast => {
-    let shouldBeRendered = true;
-    Object.keys(position).map(pos => {
-      if (position[pos] && !toast[pos]) shouldBeRendered = false;
-    })
-    return shouldBeRendered;
-  })
+  return toasts.filter(toast =>
+    toast.position.split(' ').sort().join('').toLowerCase() === position.split(' ').sort().join('').toLowerCase()
+  )
 }
 
 const Tray = (props) => {
-  const { toasts, top, bottom, left, center, right } = props;
-  const position = { top, bottom, left, center, right };
+  const { toasts, position } = props;
   const toastsToRender = filterToasts(toasts, position);
 
   return (
@@ -46,4 +46,8 @@ Tray.defaultProps = {
   right: false,
 }
 
-export default Tray;
+const mapDispatchToProps = dispatch => ({
+  dispatch,
+});
+
+export default connect(undefined, mapDispatchToProps)(Tray);

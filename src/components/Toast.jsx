@@ -9,7 +9,14 @@ class Toast extends Component {
   }
 
   componentDidMount() {
+    const { duration } = this.props;
+    if (duration !== undefined) {
+      this.timeout = setTimeout(this.props.handleTimeout, duration);
+    }
+  }
 
+  componentWillUnmount() {
+    clearTimeout(this.timeout);
   }
 
   render() {

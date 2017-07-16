@@ -9,12 +9,12 @@ const Toaster = ({ toasts, children }) => {
   return (
     <div>
       <div className="__toaster__">
-        <Tray top left toasts={toasts} />
-        <Tray top center toasts={toasts} />
-        <Tray top right toasts={toasts} />
-        <Tray bottom left toasts={toasts} />
-        <Tray bottom center toasts={toasts} />
-        <Tray bottom right toasts={toasts} />
+        <Tray position="top left" toasts={toasts} />
+        <Tray position="top center" toasts={toasts} />
+        <Tray position="top right" toasts={toasts} />
+        <Tray position="bottom left" toasts={toasts} />
+        <Tray position="bottom center" toasts={toasts} />
+        <Tray position="bottom right" toasts={toasts} />
       </div>
       {children}
     </div>
