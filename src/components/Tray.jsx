@@ -1,5 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { removeToast } from '../actions';
 
 import './Tray.style.css';
 
@@ -21,9 +23,11 @@ const getClassName = props => {
   return className;
 };
 
+const normalizePosition = position => position.split(' ').sort().join('').toLowerCase();
+
 const filterToasts = (toasts, position) => {
   return toasts.filter(toast =>
-    toast.position.split(' ').sort().join('').toLowerCase() === position.split(' ').sort().join('').toLowerCase()
+    normalizePosition(toast.position) === normalizePosition(position)
   )
 }
 
@@ -33,21 +37,19 @@ const Tray = (props) => {
 
   return (
     <ul className={getClassName(props)}>
-      {toastsToRender.map(toast => <Toast key={toast.id} {...toast} />)}
+      {toastsToRender.map(toast => (
+        <Toast key={toast.id} {...toast} removeToast={() => props.removeToast(toast.id)}/>
+      ))}
     </ul>
   );
 }
 
-Tray.defaultProps = {
-  top: false,
-  bottom: false,
-  left: false,
-  center: false,
-  right: false,
+Tray.propTypes = {
+  position: PropTypes.string.isRequired,
 }
 
 const mapDispatchToProps = dispatch => ({
-  dispatch,
+  removeToast: (id) => dispatch(removeToast(id)),
 });
 
 export default connect(undefined, mapDispatchToProps)(Tray);

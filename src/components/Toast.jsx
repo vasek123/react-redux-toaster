@@ -1,17 +1,24 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { removeToast } from '../actions';
 
 import './Toast.style.css';
 
 class Toast extends Component {
   constructor(props) {
     super(props);
+
+    this.dismiss = this.dismiss.bind(this);
   }
 
   componentDidMount() {
-    const { duration } = this.props;
-    if (duration !== undefined) {
-      this.timeout = setTimeout(this.props.handleTimeout, duration);
+    const duration = parseInt(this.props.duration);
+    if (!isNaN(duration)) {
+      this.timeout = setTimeout(() => {
+        if (this.props.handleTimeout !== undefined) this.props.handleTimeout(this.props);
+        this.props.removeToast();
+      }, duration);
     }
   }
 
@@ -19,10 +26,16 @@ class Toast extends Component {
     clearTimeout(this.timeout);
   }
 
+  dismiss() {
+    if (this.props.handleDismiss !== undefined) this.props.handleDismiss(this.props);
+    this.props.removeToast();
+  }
+
   render() {
     return (
       <li className="__toast__">
-        {this.props.text}
+        <span>{this.props.text}</span>
+        {this.props.dismiss && <button onClick={this.dismiss} style={{ float: 'right' }}>Dismiss</button>}
       </li>
     )
   }
@@ -32,12 +45,18 @@ Toast.propTypes = {
   id: PropTypes.number.isRequired,
   text: PropTypes.string.isRequired,
 
+  // Should the dismiss button be displayed
+  dissmiss: PropTypes.bool,
+
   // How long should the toast be displayed
-  // dissmiss: PropTypes.bool.isRequired,
-  duration: PropTypes.number,
+  // duration: PropTypes.oneOf([PropTypes.number, PropTypes.string]),
 
   // Passed functions
   // dismissHandler: PropTypes.func.isRequired,
+}
+
+Toast.defaultProps = {
+  dismiss: true,
 }
 
 export default Toast;

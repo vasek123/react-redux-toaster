@@ -16,7 +16,7 @@ describe('Create Toast', () => {
   })
 
   it('should merge options passed in arguments with default options', () => {
-    expect(createToast({ color: '#fff', text: 'Hi!' }, 1))
-      .toEqual({ ...DEFAULT_OPTIONS, color: '#fff', text: 'Hi!', id: 1 });
+    expect(createToast({ color: '#fff', text: 'Hi!', duration: 2000 }, 1))
+      .toEqual({ ...DEFAULT_OPTIONS, color: '#fff', text: 'Hi!', duration: 2000, id: 1 });
   })
 })
