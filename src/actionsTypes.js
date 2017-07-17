@@ -1,3 +1,3 @@
-export const ADD_TOAST = 'ADD_TOAST';
-export const REMOVE_TOAST = 'REMOVE_TOAST';
-export const REMOVE_LAST_TOAST = 'REMOVE_LAST_TOAST';
+export const ADD_TOAST = '@toaster/ADD_TOAST';
+export const REMOVE_TOAST = '@toaster/REMOVE_TOAST';
+export const REMOVE_LAST_TOAST = '@toaster/REMOVE_LAST_TOAST';

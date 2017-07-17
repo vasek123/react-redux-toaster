@@ -1,10 +1,11 @@
-export const defaultOptions = {
-  text: '',
-  position: 'right bottom',
-};
+import { DEFAULT_OPTIONS } from './constants';
 
-export default (options, id) => ({
-  ...defaultOptions,
-  ...options,
-  id,
-});
+export const customCreateToast = (defaultOptions = DEFAULT_OPTIONS) => {
+  return (options, id) => ({
+    ...defaultOptions,
+    ...options,
+    id,
+  })
+}
+
+export default customCreateToast();
